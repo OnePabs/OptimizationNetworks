@@ -14,7 +14,7 @@ class UndirectedGraph:
     links = [] #list of Undirectedlink objects
 
     def askForNodes(self):
-        print('askForNodes...')
+        #print('askForNodes...')
         while True:
             nodeName = input('Enter node name (enter exit if no more nodes): ')
             if nodeName != 'exit':
@@ -23,12 +23,12 @@ class UndirectedGraph:
                 return
     
     def askForLinks(self):
-        print('askForLinks...')
+        #print('Links...')
         while True:
-            linkNode1 = input('Enter link first node (enter exit if no more links): ')
+            linkNode1 = input('link first node name (type exit if no more links): ')
             if linkNode1 != 'exit':
-                linkNode2 = input('Enter link second node: ')
-                linkWeight = input('Enter link weight: ')
+                linkNode2 = input('link second node: ')
+                linkWeight = input('link weight: ')
                 print()
                 link = Undirectedlink(linkNode1, linkNode2, linkWeight)
                 self.links.append(link)
@@ -37,9 +37,10 @@ class UndirectedGraph:
 
 
     def createGraph(self):
-        print('creating graph...')
+        #print('creating graph...')
         self.askForNodes()
         print()
+        print('Links...')
         self.askForLinks()
 
     def printGraph(self):
@@ -60,7 +61,7 @@ class UndirectedGraph:
 
 
 #test
-print('testing...')
-g1 = UndirectedGraph('g1')
-g1.createGraph()
-g1.printGraph()
+#print('testing...')
+#g1 = UndirectedGraph('g1')
+#g1.createGraph()
+#g1.printGraph()
