@@ -6,6 +6,26 @@ class Undirectedlink:
         self.node2 = node2
         self.weight = weight
 
+    def is_node_in_link(self, node):
+        if self.node1 == node or self.node2 == node:
+            return True
+        return False
+
+    def equal(self, link2):
+        if self.is_node_in_link(link2.node1) and self.is_node_in_link(link2.node2):
+            return True
+        return False
+
+    def get_other_node(self, node):
+        #returns the other node in the link. 
+        #if node is not in the link, returns ''
+        if self.node1 == node:
+            return self.node2
+        elif self.node2 == node:
+            return self.node1
+        else:
+            return ''
+
 class UndirectedGraph:
     def __init__(self, graphName):
         self.graphName = graphName
@@ -73,7 +93,7 @@ class UndirectedGraph:
             print('Links...')
             self.askForLinks()
         
-        print_file = input("Would you like to print " + self.graphName + " [y/n]?")
+        print_file = input("Would you like to print " + self.graphName + " [y/n]?: ")
         if print_file == "y":
             self.printGraph()
 
@@ -92,7 +112,6 @@ class UndirectedGraph:
             print('link weight: ' + i.weight)
             print()
 
-    
 
 
 
