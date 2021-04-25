@@ -1,0 +1,20 @@
+n O
+n A
+n B
+n C
+n D
+n E
+n T
+
+l O A 2
+l O B 5
+l O C 4 
+l A B 2
+l A D 7
+l B C 1
+l B D 4
+l B E 3
+l C E 4
+l D E 1
+l D T 5
+l E T 7

@@ -86,12 +86,6 @@ def findSNodeCandidate(snode, listOfSolvedNodes, graph):
 g = UndirectedGraph('g1')
 g.createGraph()
 
-#Print graph option
-print()
-proceed = input('Print graph? [y/n]: ')
-if proceed == 'y':
-    g.printGraph()
-
 startNodeName = input('Enter the name of the start node: ')
 endNodeName = input('Enter the name of the end node: ')
 
@@ -115,15 +109,12 @@ while not isEndNodeReached(solved_nodes, endNodeName):
     print("Solved Nodes: ")
     for snode in solved_nodes:
         print(snode.nodeName)
+    print()
     
     #find candidates and their distance to origin:
     #each solved node provides its closest unsolved node
     candidates = []
     for snode in solved_nodes:
-
-        #print snode and its candidates
-        print(snode.nodeName + " shortest unsolved node:")
-
         candidate_link = findSNodeCandidate(snode, solved_nodes, g)
         if candidate_link != '': #no unsolved candidates is represented as an empty string
             #find candidate name
@@ -141,7 +132,7 @@ while not isEndNodeReached(solved_nodes, endNodeName):
             candidates.append(candidate)
 
             #print candidate and its total distance
-            print(candidate_name + " total distance: " + str(candidate_ds))
+            print(snode.nodeName + " shortest unsolved node: " + candidate_name + " total distance: " + str(candidate_ds))
 
 
     #find candidate with smallest distance and add it to the solved nodes list

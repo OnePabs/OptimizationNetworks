@@ -21,6 +21,15 @@ class UndirectedGraph:
                 self.nodes.append(nodeName)
             else:
                 return
+
+    def readNodesFromFileLines(self, fileLines):
+        for line in fileLines:
+            items = line.split()
+            if len(items) > 0:
+                if items[0] == "n":
+                    #line is a node. use format "n nodename" to get information
+                    self.nodes.append(items[1])
+
     
     def askForLinks(self):
         #print('Links...')
@@ -35,19 +44,46 @@ class UndirectedGraph:
             else:
                 return
 
+    def readLinksFromFileLines(self, fileLines):
+        for line in fileLines:
+            items = line.split()
+            if len(items) > 0:
+                if items[0] == "l":
+                    # format "l node1Name node2Name linkWeight"
+                    linkNode1 = items[1]
+                    linkNode2 = items[2]
+                    linkWeight = items[3]
+                    link = Undirectedlink(linkNode1, linkNode2, linkWeight)
+                    self.links.append(link)
+
+
 
     def createGraph(self):
         #print('creating graph...')
-        self.askForNodes()
-        print()
-        print('Links...')
-        self.askForLinks()
+        use_file = input("Would you like to use a file? [y/n]: ")
+        if use_file == "y":
+            filename = input("Enter filepath: ")
+            f = open(filename,"r")
+            lines = f.readlines()
+            self.readNodesFromFileLines(lines)
+            self.readLinksFromFileLines(lines)
+        else:
+            self.askForNodes()
+            print()
+            print('Links...')
+            self.askForLinks()
+        
+        print_file = input("Would you like to print " + self.graphName + " [y/n]?")
+        if print_file == "y":
+            self.printGraph()
+
+
 
     def printGraph(self):
         print('Graph Nodes: ')
         for i in self.nodes:
             print(i)
-        
+
         print()
 
         print('Graph links: ')
