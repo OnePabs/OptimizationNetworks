@@ -101,13 +101,29 @@ startNode = SNode(startNodeName, [], 0)
 #Start a list of solved nodes
 solved_nodes = [startNode]
 
+iterantion_num = 0
+
+print()
+print("-------------------------------------")
+print("Iterations")
 
 while not isEndNodeReached(solved_nodes, endNodeName):
+
+    #print iteration information
+    print()
+    print("Iteration: " + str(iterantion_num))
+    print("Solved Nodes: ")
+    for snode in solved_nodes:
+        print(snode.nodeName)
     
     #find candidates and their distance to origin:
     #each solved node provides its closest unsolved node
     candidates = []
     for snode in solved_nodes:
+
+        #print snode and its candidates
+        print(snode.nodeName + " shortest unsolved node:")
+
         candidate_link = findSNodeCandidate(snode, solved_nodes, g)
         if candidate_link != '': #no unsolved candidates is represented as an empty string
             #find candidate name
@@ -124,6 +140,10 @@ while not isEndNodeReached(solved_nodes, endNodeName):
             #append candidate to candidates list
             candidates.append(candidate)
 
+            #print candidate and its total distance
+            print(candidate_name + " total distance: " + str(candidate_ds))
+
+
     #find candidate with smallest distance and add it to the solved nodes list
     min_distance = candidates[0].distance
     for candidate in candidates:
@@ -134,9 +154,18 @@ while not isEndNodeReached(solved_nodes, endNodeName):
         #append first candidate with smallest distance
         if candidate.distance == min_distance:
             solved_nodes.append(candidate)
+            print("-> Minimum distance candidate: " + candidate.nodeName)
+            candidate.printSNodePath()
+
+
+    #increase iteration number
+    iterantion_num += 1
+
+print("---------------------------------")
+print()
 
 #print smallest path to endNode
 for snode in solved_nodes:
     if snode.nodeName == endNodeName:
-        print("end node has been reached. smallest path: ")
+        print("end node has been reached: ")
         snode.printSNodePath()
